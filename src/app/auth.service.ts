@@ -27,5 +27,8 @@ export class AuthService {
   postLoginAPI(data: AuthModel) {
     return this.http.post(`${this.BASE_URL}${this.AUTH_API.LOGIN}`, data);
   }
-
+  
+  postRegisterAPI(data: AuthModel) {
+    return this.http.post(`${this.BASE_URL}${this.AUTH_API.REGISTER}`, data);
+  }
 }
