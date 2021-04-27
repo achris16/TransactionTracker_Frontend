@@ -1,25 +1,40 @@
-<span *ngIf="showSuccessMessage">{{successMessage}}</span>
+<div class="login-container">
+  <span *ngIf="showSuccessMessage">{{successMessage}}</span>
 <span *ngIf="showErrorMessage">{{errorMessage}}</span>
-<form 
-  [formGroup]="profileForm" 
-  (ngSubmit)="onSubmit()"
->
-  
-  <label>
-    Email:
-    <input type="text" formControlName="email">
-  </label>
-
-  <label>
-    Password:
-    <input type="text" formControlName="password">
-  </label>
-
-  <button 
-    type="submit" 
-    [disabled]="!profileForm.valid"
+  <form 
+    class="form-signin"
+    [formGroup]="profileForm" 
+    (ngSubmit)="onSubmit()"
   >
-    {{currentRoute === 'login' ? 'Login' : 'Register'}}
-  </button>
-
-</form>
+    <img class="mb-4" src="#" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">
+      {{currentRoute === 'login' ? 'Login' : 'Register'}}
+    </h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input 
+      type="email"
+      id="inputEmail"
+      class="form-control"
+      placeholder="Email address"
+      autofocus
+      formControlName="email"
+    >
+    
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input 
+      type="password" 
+      id="inputPassword"
+      class="form-control"
+      placeholder="Password"
+      formControlName="password"
+    >
+    <button 
+      class="btn btn-lg btn-primary btn-block" 
+      type="submit"
+      [disabled]="!profileForm.valid"
+    >
+      {{currentRoute === 'login' ? 'Login' : 'Register'}}
+    </button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+  </form>
+</div>
