@@ -1,0 +1,12 @@
+.transaction-history {
+  
+  .transaction-row {
+    display: flex;
+    min-width: 140px;
+
+    > * {
+      margin: 0 1rem;
+      min-width: 140px;
+    }
+  }
+}

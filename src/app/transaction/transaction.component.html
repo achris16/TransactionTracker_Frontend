@@ -1,0 +1,20 @@
+<div class="page-container">
+  <p>transaction works!</p>
+  <div class="transaction-history">
+    <div class="transaction-row">
+      <h3>Amount</h3>
+      <h3>Description</h3>
+      <h3>Created Date</h3>
+      <h3>Updated Date</h3>
+    </div>
+    <div 
+      class="transaction-row"
+      *ngFor="let transaction of transactions"
+    >
+      <p>{{transaction.amount}}</p>
+      <p>{{transaction.description}}</p>
+      <p>{{transaction.created_date}}</p>
+      <p>{{transaction.updated_date}}</p>
+    </div>
+  </div>
+</div>
