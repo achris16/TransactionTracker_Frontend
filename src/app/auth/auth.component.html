@@ -1,12 +1,35 @@
 <div class="page-container">
-  <span *ngIf="showSuccessMessage">{{successMessage}}</span>
-  <span *ngIf="showErrorMessage">{{errorMessage}}</span>
+  <!-- Start Error Section -->
+  <div 
+    *ngIf="showSuccessMessage || showErrorMessage"  
+    class="errorContainer"
+  >
+    <div
+      *ngIf="showSuccessMessage" 
+      class="alert alert-success alert-dismissible fade show"
+    >
+      <strong>{{successMessage}}</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div
+      *ngIf="showErrorMessage" 
+      class="alert alert-danger alert-dismissible fade show"
+    >
+      <strong>{{errorMessage}}</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <!-- End Error Section -->
   <form 
     class="form-signin"
     [formGroup]="profileForm" 
     (ngSubmit)="onSubmit()"
   >
-    <img class="mb-4" src="#" alt="" width="72" height="72">
+    <img class="tt-logo mb-4" src="assets/tt_logo.jpg" alt="">
     <h1 class="h3 mb-3 font-weight-normal">
       {{currentRoute === 'login' ? 'Login' : 'Register'}}
     </h1>
@@ -35,6 +58,5 @@
     >
       {{currentRoute === 'login' ? 'Login' : 'Register'}}
     </button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
   </form>
 </div>

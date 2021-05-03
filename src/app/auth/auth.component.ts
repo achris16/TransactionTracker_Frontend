@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 
 @Component({
@@ -24,11 +24,24 @@ export class AuthComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.route.url.subscribe((url) => { 
       this.currentRoute = url[0].path;
+    });
+
+    this.route.params.subscribe((data) => {
+      console.log('params data ', data);
+      if (data.message) {
+        this.errorMessage = data.message;
+        this.showErrorMessage = true;
+      }
+      if (data.successMessage) {
+        this.successMessage = data.successMessage;
+        this.showSuccessMessage = true;
+      }
     });
   }
 
@@ -45,7 +58,7 @@ export class AuthComponent implements OnInit {
             this.authService.setJWT(resp.token);
   
             console.log(this.authService.getJWT());
-            // @TODO: Redirect to main page
+            this.router.navigate(['/home']);
           },
           (err: any) => {
             console.log(err);
@@ -53,7 +66,6 @@ export class AuthComponent implements OnInit {
             this.errorMessage = err.error.message;
             this.showErrorMessage = true;
             this.showSuccessMessage = false; 
-          
           }
         );
     } else if  (this.currentRoute === 'register') {
@@ -64,7 +76,7 @@ export class AuthComponent implements OnInit {
             this.successMessage = resp.message;
             this.showErrorMessage = false;
             this.showSuccessMessage = true;
-            // @TODO:redirect to login page
+            this.router.navigate(['/login', { successMessage: 'You have successfully registered. Please login.' }]);
           },
           (err: any) => {
             console.log(err);

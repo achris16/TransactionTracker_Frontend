@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 
 export interface TransactionModel {
+  id?: string;
   transactionType?: string;
   amount: string;
   description: string;
@@ -17,6 +18,7 @@ export class TransactionService {
   BASE_URL = 'http://localhost:5000/api/v1/';
   TRANSACTION_API = {
     TRANSACTION: 'transaction',
+    TRANSACTION_ID: 'transaction/:id',
   };
   
   constructor(
@@ -43,6 +45,21 @@ export class TransactionService {
   getTransactionAPI() {
     return this.http.get(
       `${this.BASE_URL}${this.TRANSACTION_API.TRANSACTION}`,
+       { headers: new HttpHeaders({ 'X-Auth': this.authService.getJWT() }) }
+    );
+  }
+  
+  putTransactionAPI(id: string, data: TransactionModel) {
+    return this.http.put(
+      `${this.BASE_URL}${this.TRANSACTION_API.TRANSACTION_ID.replace(':id', id)}`,
+       this.buildPostTransactionPayload(data),
+       { headers: new HttpHeaders({ 'X-Auth': this.authService.getJWT() }) }
+    );
+  }
+  
+  deleteTransactionAPI(id: string) {
+    return this.http.delete(
+      `${this.BASE_URL}${this.TRANSACTION_API.TRANSACTION_ID.replace(':id', id)}`,
        { headers: new HttpHeaders({ 'X-Auth': this.authService.getJWT() }) }
     );
   }

@@ -15,12 +15,14 @@ import { TransactionComponent } from './transaction/transaction.component';
 // Services
 import { AuthService } from './services/auth/auth.service';
 import { TransactionService } from './services/transaction/transaction.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     TransactionComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

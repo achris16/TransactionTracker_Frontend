@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 .page-container {
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 3.5rem;
+}
+
+.nav-link:hover {
+  cursor: pointer;
 }
